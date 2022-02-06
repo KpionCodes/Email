@@ -1,0 +1,41 @@
+sender = input("What is your gmail? ")
+password = input("What is your password for"+" "+sender+"? ")
+receiver = input("Who do you want to send the email to?: ")
+subject = input ("What is the subject? ")
+body = input ("What do you want to type? ")
+
+
+#This code will send a email
+
+import smtplib
+
+sender = sender
+receiver = receiver
+password = password
+subject = subject
+body = body
+
+message = f"""From: {sender}
+To: {receiver}
+Subject: {subject}\n
+{body}
+"""
+
+
+server = smtplib.SMTP("smtp.gmail.com", 587)
+server.starttls()
+
+try:
+    server.login(sender,password)
+    print("Logged in...")
+    server.sendmail(sender, receiver, message)
+    print("Email has been sent!")
+
+except smtplib.SMTPAuthenticationError:    print("sign in failed")
+
+again = input("Do you want to send another email? ")
+
+if again == "yes":
+    print("RESET")
+else:
+    print("Thanks!")
